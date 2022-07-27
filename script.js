@@ -1,30 +1,30 @@
 window.addEventListener("load", function() {
+   // this.alert("Welcome to Thunderdome!")
+   let pilotInput = document.getElementById("pilotName");
+   let copilotInput = document.getElementById("copilotName");
+   let fuelLevelInput = document.getElementById("fuelLevel");
+   let cargoMassInput = document.getElementById("cargoMass");
+   let itemStatusNode = document.getElementById("itemStatus");
 
-   let pilotNode = document.querySelector("input[name=pilotName]");
-   let copilotNode = document.querySelector("input[name=copilotName]");
-   let fuelLevelNode = document.querySelector("input[name=fuelLevel]");
-   let cargoMassNode = document.querySelector("input[name=cargoMass]");
+   let formNode = document.getElementById("launchForm");
 
-   let form = document.querySelector("form");
+   formNode.addEventListener("submit", function(event) {
+      
+      event.preventDefault();
 
-   form.addEventListener("submit", function(event) {
-
-      if (pilotNode.value === "" || copilotNode.value === "" || fuelLevelNode.value === "" || cargoMassNode.value === ""){
+      if (pilotInput.value === "" || copilotInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === ""){
          alert("Do not leave any field(s) empty.");
-         event.preventDefault();
       };
       
-      if (isNaN(pilotNode.value) || isNaN(copilotNode.value)){
-         //alert("Both pilots are ready."); 
-      } else {
+      if ((!isNaN(pilotInput.value)) || (!isNaN(copilotInput.value))){
          alert("Both pilots names must only contain letters.");
-         event.preventDefault();
-      };
+      }
 
-      if (isNaN(fuelLevelNode.value) || isNaN(cargoMassNode.value)){
+      if (isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value)){
          alert("Both Fuel Level and Cargo Mass must only contain numbers.");
-         event.preventDefault();
       };
+      
+      itemStatusNode.style.visibility = 'visible';
 
    });
 
