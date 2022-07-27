@@ -14,6 +14,18 @@ window.addEventListener("load", function() {
          event.preventDefault();
       };
       
+      if (isNaN(pilotNode.value) || isNaN(copilotNode.value)){
+         //alert("Both pilots are ready."); 
+      } else {
+         alert("Both pilots names must only contain letters.");
+         event.preventDefault();
+      };
+
+      if (isNaN(fuelLevelNode.value) || isNaN(cargoMassNode.value)){
+         alert("Both Fuel Level and Cargo Mass must only contain numbers.");
+         event.preventDefault();
+      };
+
    });
 
 })
