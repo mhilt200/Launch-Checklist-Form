@@ -59,17 +59,24 @@ window.addEventListener("load", function() {
             cargoStatusNode.innerHTML = `Cargo mass check passed`;
          }
       }
-   });
+   })
+
+   this.fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+      response.json().then(function(json) {
+         let missionTargetNode = document.getElementById("missionTarget");
+         let randomDestination = Math.floor(Math.random() * json.length);
+
+         missionTargetNode.innerHTML = `<h2>Mission Destination</h2>
+         <ul>
+            <li>Name: ${json[randomDestination].name}</li>
+            <li>Diameter: ${json[randomDestination].diameter}</li>
+            <li>Star: ${json[randomDestination].star}</li>
+            <li>Distance from Earth: ${json[randomDestination].distance}</li>
+            <li>Number of Moons: ${json[randomDestination].moons}</li>
+         </ul>
+         <img src="${json[randomDestination].image}">`;
+
+      })
+   })
 })
 
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ul>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ul>
-<img src="${}">
-*/
