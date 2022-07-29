@@ -1,5 +1,5 @@
 window.addEventListener("load", function() {
-   // this.alert("Welcome to Thunderdome!")
+
    let pilotInput = document.getElementById("pilotName");
    let copilotInput = document.getElementById("copilotName");
    let fuelLevelInput = document.getElementById("fuelLevel");
@@ -34,31 +34,45 @@ window.addEventListener("load", function() {
       } else {
       
          if (fuelLevelInput.value < 10000) {
+            if (cargoMassInput.value > 10000) {
             itemStatusNode.style.visibility = 'visible';
             launchStatusNode.innerHTML = `Shuttle not ready for launch`;
             launchStatusNode.style.color = "red"
             pilotStatusNode.innerHTML = `Pilot: ${pilotInput.value} is ready for launch`;
             copilotStatusNode.innerHTML = `Co-Pilot: ${copilotInput.value} is ready for launch`;
-            fuelStatusNode.innerHTML = `Not enough fuel for journey! Must be more than 10,000 liters.`;
-            cargoStatusNode.innerHTML = `Please update Fuel Level above`;
+            fuelStatusNode.innerHTML = `Not enough fuel for journey! Must be more than 10,000 liters`;
+            cargoStatusNode.innerHTML = `Too much mass for takeoff! Must be less than 10,000 kilograms`;
             event.preventDefault();
-         } else if (cargoMassInput.value > 10000) {
-            itemStatusNode.style.visibility = 'visible';
-            launchStatusNode.innerHTML = `Shuttle not ready for launch`;
-            launchStatusNode.style.color = "red"
-            pilotStatusNode.innerHTML = `Pilot: ${pilotInput.value} is ready for launch`;
-            copilotStatusNode.innerHTML = `Co-Pilot: ${copilotInput.value} is ready for launch`;
-            fuelStatusNode.innerHTML = `Fuel Level check passed`;
-            cargoStatusNode.innerHTML = `Too much mass for takeoff! Must be less than 10,000 kilograms.`;
-            event.preventDefault();
-         } else { // if (fuelLevelInput.value >= 10000 && cargoMassInput.value <= 10000) {
-            itemStatusNode.style.visibility = 'visible';
-            launchStatusNode.innerHTML = `Shuttle is ready for launch`;
-            launchStatusNode.style.color = "green";
-            pilotStatusNode.innerHTML = `Pilot: ${pilotInput.value} is ready for launch`;
-            copilotStatusNode.innerHTML = `Co-Pilot: ${copilotInput.value} is ready for launch`;
-            fuelStatusNode.innerHTML = `Fuel Level check passed`;
-            cargoStatusNode.innerHTML = `Cargo mass check passed`;
+            } else if (cargoMassInput.value <= 10000) {
+               itemStatusNode.style.visibility = 'visible';
+               launchStatusNode.innerHTML = `Shuttle not ready for launch`;
+               launchStatusNode.style.color = "red"
+               pilotStatusNode.innerHTML = `Pilot: ${pilotInput.value} is ready for launch`;
+               copilotStatusNode.innerHTML = `Co-Pilot: ${copilotInput.value} is ready for launch`;
+               fuelStatusNode.innerHTML = `Not enough fuel for journey! Must be more than 10,000 liters`;
+               cargoStatusNode.innerHTML = `Cargo mass check passed`;
+               event.preventDefault();
+            };
+            // We're not reaching this conditional ?!?
+            if (fuelLevelInput.value >= 10000) { 
+                  if (cargoMassInput.value > 10000) {
+                  itemStatusNode.style.visibility = 'visible';
+                  launchStatusNode.innerHTML = `Shuttle not ready for launch`;
+                  launchStatusNode.style.color = "red";
+                  pilotStatusNode.innerHTML = `Pilot: ${pilotInput.value} is ready for launch`;
+                  copilotStatusNode.innerHTML = `Co-Pilot: ${copilotInput.value} is ready for launch`;
+                  fuelStatusNode.innerHTML = `Fuel Level check passed`;
+                  cargoStatusNode.innerHTML = `Too much mass for takeoff! Must be less than 10,000 kilograms`;
+               } else if (cargoMassInput.value <= 10000) {
+                  itemStatusNode.style.visibility = 'visible';
+                  launchStatusNode.innerHTML = `Shuttle is ready for launch`;
+                  launchStatusNode.style.color = "green";
+                  pilotStatusNode.innerHTML = `Pilot: ${pilotInput.value} is ready for launch`;
+                  copilotStatusNode.innerHTML = `Co-Pilot: ${copilotInput.value} is ready for launch`;
+                  fuelStatusNode.innerHTML = `Fuel Level check passed`;
+                  cargoStatusNode.innerHTML = `Cargo mass check passed`;
+               }
+            }
          }
       }
    })
