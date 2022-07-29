@@ -19,19 +19,19 @@ window.addEventListener("load", function() {
       
       event.preventDefault();
 
-      if (pilotInput.value === "" || copilotInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === ""){
+      if (pilotInput.value === "" || copilotInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "") {
          alert("Do not leave any field(s) empty.");
          itemStatusNode.style.visibility = 'hidden';
          launchStatusNode.style.color = "black";
          launchStatusNode.innerHTML = "Awaiting Information Before Launch";
          event.preventDefault();
-      } else if ((!isNaN(pilotInput.value)) || (!isNaN(copilotInput.value))){
+      } else if ((!isNaN(pilotInput.value)) || (!isNaN(copilotInput.value))) {
          alert("Both pilots names must only contain letters.");
          itemStatusNode.style.visibility = 'hidden';
          launchStatusNode.style.color = "black";
          launchStatusNode.innerHTML = "Awaiting Information Before Launch";
          event.preventDefault();
-      } else if (isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value)){
+      } else if (isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value)) {
          alert("Both Fuel Level and Cargo Mass must only contain numbers.");
          itemStatusNode.style.visibility = 'hidden';
          launchStatusNode.style.color = "black";
@@ -39,45 +39,32 @@ window.addEventListener("load", function() {
          event.preventDefault();
       } else {
          
+         itemStatusNode.style.visibility = 'visible';
+         launchStatusNode.innerHTML = `Shuttle is ready for launch`;
+         launchStatusNode.style.color = "green";
+         pilotStatusNode.innerHTML = `Pilot ${pilotInput.value} is ready for launch`;
+         copilotStatusNode.innerHTML = `Co-Pilot ${copilotInput.value} is ready for launch`;
+         fuelStatusNode.innerHTML = `Fuel Level check passed`;
+         cargoStatusNode.innerHTML = `Cargo mass check passed`;
+
          if (fuelLevelInput.value < 10000 || cargoMassInput.value > 10000) {
+            launchStatusNode.innerHTML = `Shuttle not ready for launch`;
+            launchStatusNode.style.color = "red"
             if (fuelLevelInput.value < 10000 && cargoMassInput.value > 10000) {
-               itemStatusNode.style.visibility = 'visible';
-               pilotStatusNode.innerHTML = `Pilot ${pilotInput.value} is ready for launch`;
-               copilotStatusNode.innerHTML = `Co-Pilot ${copilotInput.value} is ready for launch`;
-               launchStatusNode.innerHTML = `Shuttle not ready for launch`;
-               launchStatusNode.style.color = "red"
                fuelStatusNode.innerHTML = `Not enough fuel for journey! Must be more than 10,000 liters`;
                cargoStatusNode.innerHTML = `Too much mass for takeoff! Must be less than 10,000 kilograms`;
                event.preventDefault();
             } else if (fuelLevelInput.value < 10000 && cargoMassInput.value <= 10000) {
-               itemStatusNode.style.visibility = 'visible';
-               pilotStatusNode.innerHTML = `Pilot ${pilotInput.value} is ready for launch`;
-               copilotStatusNode.innerHTML = `Co-Pilot ${copilotInput.value} is ready for launch`;
-               launchStatusNode.innerHTML = `Shuttle not ready for launch`;
-               launchStatusNode.style.color = "red"
                fuelStatusNode.innerHTML = `Not enough fuel for journey! Must be more than 10,000 liters`;
                cargoStatusNode.innerHTML = `Cargo mass check passed`;
                event.preventDefault();
             } else if (fuelLevelInput.value >= 10000 && cargoMassInput.value > 10000) {
-               itemStatusNode.style.visibility = 'visible';
-               pilotStatusNode.innerHTML = `Pilot ${pilotInput.value} is ready for launch`;
-               copilotStatusNode.innerHTML = `Co-Pilot ${copilotInput.value} is ready for launch`;
-               launchStatusNode.innerHTML = `Shuttle not ready for launch`;
-               launchStatusNode.style.color = "red"
                fuelStatusNode.innerHTML = `Fuel Level check passed`;
                cargoStatusNode.innerHTML = `Too much mass for takeoff! Must be less than 10,000 kilograms`;
                event.preventDefault();
             }
-         } else {
-            itemStatusNode.style.visibility = 'visible';
-            launchStatusNode.innerHTML = `Shuttle is ready for launch`;
-            launchStatusNode.style.color = "green";
-            pilotStatusNode.innerHTML = `Pilot ${pilotInput.value} is ready for launch`;
-            copilotStatusNode.innerHTML = `Co-Pilot ${copilotInput.value} is ready for launch`;
-            fuelStatusNode.innerHTML = `Fuel Level check passed`;
-            cargoStatusNode.innerHTML = `Cargo mass check passed`;
-         };
-      };
+         }
+      }
    })
 
    this.fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
@@ -108,7 +95,6 @@ window.addEventListener("load", function() {
             <li>Number of Moons: ${json[randomDestination].moons}</li>
             </ul>
             <img src="${json[randomDestination].image}">`;
-
          })
       })
    })
