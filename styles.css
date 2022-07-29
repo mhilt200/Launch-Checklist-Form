@@ -42,13 +42,19 @@ div {
     padding: 10px;
 }
 
-.refreshButton {
-    background-color: #ECF0F1;
+#refreshButton {
+    background-color: #419f6a;
+    border: none;
+    color: white;
+    border-radius: 8px;
     text-align: center;
     margin: 50px auto;
-    width: 50%;
-    border: 3px solid black;
+    width: 300px;
     padding: 10px;
+}
+
+#refreshButton button{
+    width: 50%;
 }
 
 button {
